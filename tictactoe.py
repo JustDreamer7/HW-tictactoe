@@ -52,7 +52,7 @@ class TicTacGame:
     def validate_priority(queue):
         """Validate input of priority turn"""
         if queue not in ("y", "n"):
-            raise ValueError("Введи либо y, либо n:")
+            raise ValueError("Должно быть либо y, либо n:")
         return queue
 
     def validate_input(self, move):

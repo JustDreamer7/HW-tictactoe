@@ -7,12 +7,12 @@ class ValidateInputTest(unittest.TestCase):
     def setUp(self):
         self.inputs = ["0", "3 1", "15", "-1.5", "a", "b b", "3"]
         self.labels = [(0),
-                       "There should be one number",
-                       "Cell index should be [0-8]",
-                       "Cell index should be int",
-                       "Cell index should be int",
-                       "There should be one number",
-                       "Cell is busy"]
+                       "Должно быть в вводе целое число",
+                       "Должно быть число от одного до восьми",
+                       "Должно быть в вводе целое число",
+                       "Должно быть в вводе целое число",
+                       "Должно быть в вводе целое число",
+                       "Эта клетка занята"]
         self.game = TicTacGame()
         self.game.board = [" "] * 9
         self.game.board[3] = "X"
@@ -32,18 +32,16 @@ class ValidateInputTest(unittest.TestCase):
 
 class ValidatePriority(unittest.TestCase):
     def setUp(self):
-        self.inputs = ["a", "0", "y", "n"]
+        self.inputs = ["n", "y", "ds"]
+        self.labels = [("n"), ("y"), "Должно быть либо y, либо n:"]
         self.game = TicTacGame()
-        self.labels = ["There should be y or n",
-                       "There should be y or n",
-                       (0),
-                       (0)]
+        self.game.board = [" "] * 9
 
     def test_result(self):
         for inputs, labels in zip(self.inputs, self.labels):
             try:
                 res = self.game.validate_priority(inputs)
-            except (ValueError) as error:
+            except ValueError as error:
                 assert labels == str(error)
             else:
                 assert labels == res
